@@ -9,7 +9,7 @@ export default async function(req:NextApiRequest, res:NextApiResponse){
     if(!jwt){
         return res.send({message: 'not logged in'})
     }else{
-        const serialsed = serialize('auth', null, {
+        const serialsed = serialize('auth', '', {
         httpOnly: true,
         secure: process.env.NODE_ENV !== 'development',
         sameSite: 'strict',

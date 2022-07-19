@@ -8,7 +8,7 @@ import Footer from '../components/Footer'
 import { useStateContext } from '../contexts/ContextProvider'
 
 
-const Home: NextPage = (props) => {
+const Home: NextPage = () => {
 
 
   const { activeMenu } = useStateContext()

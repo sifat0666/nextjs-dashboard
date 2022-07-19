@@ -1,9 +1,9 @@
 import React from 'react'
 
-function protectd() {
+function Protectd() {
   return (
     <div>protected</div>
   )
 }
 
-export default protectd
+export default Protectd

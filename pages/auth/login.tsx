@@ -13,7 +13,7 @@ type Inputs = {
     password: string
 }
 
-export default function login() {
+export default function Login(props: any) {
 
     const {register, handleSubmit, formState: {errors}} = useForm<Inputs>()
     const router = useRouter()

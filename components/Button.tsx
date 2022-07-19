@@ -8,6 +8,7 @@ const Button = ({color, bgColor, borderRadius, text, size}: {
   size: string
 }) => {
   return (
+    
     <button 
       type='button' 
       style={{backgroundColor: bgColor, color, borderRadius  }}

@@ -3,7 +3,7 @@ import { IoMdThermometer } from 'react-icons/io'
 import Button from '../components/Button'
 import { earningData } from '../data/dummy'
 
-const ecommerce = () => {
+const Ecommerce = () => {
   return (
     <div>
       <div className='flex flex-wrap lg:flex-nowrap justify-center'>
@@ -52,4 +52,4 @@ const ecommerce = () => {
   )
 }
 
-export default ecommerce
+export default Ecommerce

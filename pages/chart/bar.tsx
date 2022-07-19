@@ -1,9 +1,9 @@
 import React from 'react'
 
-const bar = () => {
+const Bar = () => {
   return (
     <div>bar</div>
   )
 }
 
-export default bar
+export default Bar

@@ -1,13 +1,14 @@
 import React from 'react'
 import {SiShopware} from 'react-icons/si'
 import {MdOutlineCancel} from 'react-icons/md'
-import { TooltipComponent } from '@syncfusion/ej2-react-popups'
+// import { TooltipComponent } from '@syncfusion/ej2-react-popups'
 import Link from 'next/link'
 // import 
 import { links } from '../data/dummy';
-import { NavLink } from './Navlink'
+// import { NavLink } from './Navlink'
 import { useRouter } from 'next/router'
 import { useStateContext } from '../contexts/ContextProvider'
+import Tooltip from './Tooltip';
 
 function Sidebar() {
 
@@ -39,7 +40,7 @@ function Sidebar() {
             <span>ecom</span>
             </a>
           </Link>
-          <TooltipComponent content="close" position="BottomCenter">
+          <Tooltip content="close">
             <button 
             type='button' 
             onClick={()=>{
@@ -49,7 +50,7 @@ function Sidebar() {
             >
               <MdOutlineCancel />
             </button>
-          </TooltipComponent>
+          </Tooltip>
         </div>
 
         <div className='mt-10'>
@@ -59,7 +60,7 @@ function Sidebar() {
                 {item.title}
               </p>
               {item.links.map(link => (
-                <Link href={`/${link.name}`}>
+                <Link key={link.name} href={`/${link.name}`}>
 
                  <div onClick={handleCloseSideBar} className={normalLink} key={link.name}>
                   {link.icon}

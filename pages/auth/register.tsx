@@ -44,10 +44,8 @@ const createUserSchema = object({
 
 
 
-
-export default function register() {
-
-    const {register, handleSubmit, formState: {errors}} = useForm<Inputs>({
+const Register = () => {
+        const {register, handleSubmit, formState: {errors}} = useForm<Inputs>({
         resolver: zodResolver(createUserSchema)
     })
 
@@ -135,3 +133,5 @@ export default function register() {
     </div>
   )
 }
+
+export default Register

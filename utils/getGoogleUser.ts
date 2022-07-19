@@ -15,6 +15,9 @@ interface GoogleUserResult {
 export async function getGoogleUser({
   id_token,
   access_token,
+}: {
+  id_token: string,
+  access_token: string
 }): Promise<GoogleUserResult> {
   try {
     const res = await axios.get<GoogleUserResult>(

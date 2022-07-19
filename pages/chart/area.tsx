@@ -1,9 +1,9 @@
 import React from 'react'
 
-const area = () => {
+const Area = () => {
   return (
     <div>area</div>
   )
 }
 
-export default area
+export default Area

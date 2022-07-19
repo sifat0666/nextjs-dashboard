@@ -1,7 +1,7 @@
 import React from 'react'
 import Tooltip from '../components/Tooltip'
 
-function test() {
+function Test() {
   return (
     <div className='m-10'>
         {/* <Tooltip >hello</Tooltip> */}
@@ -9,4 +9,4 @@ function test() {
   )
 }
 
-export default test
+export default Test
