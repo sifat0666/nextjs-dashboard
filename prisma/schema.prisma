@@ -17,6 +17,7 @@ model Product {
   published Boolean @default(false)
   author    User?   @relation(fields: [authorId], references: [id])
   authorId  String?
+  image String[]
 }
 
 model User {

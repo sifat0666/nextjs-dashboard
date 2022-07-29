@@ -1,9 +1,13 @@
 import prisma  from "./../../lib/prisma";
 import { NextApiRequest, NextApiResponse } from "next";
 import argon2 from 'argon2'
+import { serialize } from "cookie";
+import { sign } from "jsonwebtoken";
+import { omit } from "lodash";
 
 export default async function(req: NextApiRequest, res: NextApiResponse){
-    const {email, password} = req.body
+    const {name, email, password} = req.body
+    const secret: any = process.env.SECRET
     // console.log(email)
 
     const user = await prisma.user.findUnique({where: {email : email}})
@@ -14,10 +18,23 @@ export default async function(req: NextApiRequest, res: NextApiResponse){
       const hash = await argon2.hash(password)
       const newUser = await prisma.user.create({
         data: {
-          email, password: hash
+          email, password: hash, name
         }
       })
-      res.json(newUser)
+
+      const token = sign( omit(newUser, "password"), secret)
+
+      const serialsed = serialize('auth', token, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV !== 'development',
+          sameSite: 'strict',
+          maxAge: 60*60*24*30,
+          path: '/'
+      })
+
+
+      res.setHeader('Set-Cookie', serialsed)
+      res.json({message: 'success'})
     } catch (error) {
       console.log(error)
     }

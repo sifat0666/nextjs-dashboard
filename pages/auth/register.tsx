@@ -44,8 +44,8 @@ const createUserSchema = object({
 
 
 
-const Register = () => {
-        const {register, handleSubmit, formState: {errors}} = useForm<Inputs>({
+const Register = (props) => {
+    const {register, handleSubmit, formState: {errors}} = useForm<Inputs>({
         resolver: zodResolver(createUserSchema)
     })
 

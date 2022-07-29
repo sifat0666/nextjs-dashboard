@@ -3,12 +3,13 @@ import argon2 from "argon2";
 import { NextApiRequest, NextApiResponse } from "next";
 import {sign} from 'jsonwebtoken'
 import {serialize} from 'cookie'
+import {omit} from 'lodash'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
    
     const secret: any = process.env.SECRET
 
-    const {email, password} = req.body
+    const {name, email, password} = req.body
     const user = await prisma.user.findUnique({where: {email: email}})
 
     if(!user) return res.json({err: 'user not found'})
@@ -18,10 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     if(!isMatched) return res.json({err: 'incorrect password'})
     
-    const token = sign({
-        exp: Math.floor(Date.now()/1000) + 60*60*24*30,
-        email: email
-    }, secret)
+    const token = sign( omit(user, "password"), secret)
 
     const serialsed = serialize('auth', token, {
         httpOnly: true,
