@@ -8,7 +8,7 @@ import { FiShoppingCart } from 'react-icons/fi'
 import { IconType } from 'react-icons/lib'
 import { MdArrowDownward, MdKeyboardArrowDown } from 'react-icons/md'
 import { RiNotification3Line } from 'react-icons/ri'
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 import { useStateContext } from '../contexts/ContextProvider'
 import Cart from './Cart'
 import Chat from './Chat'
@@ -26,8 +26,8 @@ const NavButton = ({title, customFunc, icon, color, dotColor}:{
 }) => {
 
   return <Tooltip content={title}>
-    <button type='button' onClick={customFunc} className='relative text-xl rounded-full p-3 hover:bg-light-gray'>
-      <span style={{background: dotColor  }} className='absolute inline-flex rounded-full h-2 w-2 right-2 top-2' />
+    <button type='button' onClick={customFunc} className='relative p-3 text-xl rounded-full hover:bg-light-gray'>
+      <span style={{background: dotColor  }} className='absolute inline-flex w-2 h-2 rounded-full right-2 top-2' />
         {icon}
     </button>
   </Tooltip>
@@ -40,7 +40,7 @@ function Navbar() {
   const {activeMenu, setActiveMenu, isClicked, setIsClicked, handleClick} = useStateContext()
   // useEffect(console.log(data), ())
   return (
-    <div className='flex justify-between p-2 md:mx-6 relative'>
+    <div className='relative flex justify-between p-2 md:mx-6'>
       <NavButton 
         title='menu' 
         customFunc={()=> setActiveMenu(prv => !prv)} 
@@ -74,24 +74,24 @@ function Navbar() {
             <div>
 
               {data?.name ? (
-                <div className='flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg' onClick={() => handleClick('userProfile')}>
+                <div className='flex items-center gap-2 p-1 rounded-lg cursor-pointer hover:bg-light-gray' onClick={() => handleClick('userProfile')}>
               
               
               <img 
-                className='rounded-full w-8 h-8'
+                className='w-8 h-8 rounded-full'
                 src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png' 
                 alt="user" 
               />
               <p>
                 <span className='text-gray-400 text-14'>Hi, </span>
-                <span className='text-gray-400 font-bold ml-1 text-14'>{data?.name}</span>
+                <span className='ml-1 font-bold text-gray-400 text-14'>{data?.name}</span>
                 <MdKeyboardArrowDown className='text-gray-400 text-14' />
               </p>
 
               
               </div>
               ): (
-              <div className='flex p-1 items-center gap-2'>
+              <div className='flex items-center gap-2 p-1'>
                 <Link href='/auth/login'><button>login</button></Link>
                 <Link href='/auth/register'><button>register</button></Link>
 

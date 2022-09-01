@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import {PrismaClient} from '@prisma/client'
+import { verify } from "jsonwebtoken";
 
 export default async function(req:NextApiRequest, res:NextApiResponse){
 
@@ -8,13 +9,16 @@ export default async function(req:NextApiRequest, res:NextApiResponse){
 
     const jwt = cookies.auth
 
-    if(!jwt) return res.json({message: 'invalid token'})
+    if(!jwt) return res.json({error: 'invalid token'})
 
-    console.log(jwt)
+    // console.log(jwt)
+
+   try {
+     const payload = verify(jwt, process.env.SECRET!)
+     res.json(payload)
+   } catch (error) {
+    res.json({error: 'invalid token'})
+   }
 
 
-
-    const prisma = new PrismaClient()
-    const user = await prisma.user.findMany()
-    res.send(user)
 }

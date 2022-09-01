@@ -1,9 +1,8 @@
-import axios from 'axios'
 import { omit } from 'lodash'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-const ABC = () => {
+const ABC = (props) => {
   const {register, watch, handleSubmit, formState: {errors}} = useForm()
 
 
@@ -12,21 +11,10 @@ const ABC = () => {
     const [file, setFile] = useState()
 
 
-  const onSubmit = async (values: any) => {
-    console.log(values)
+  const onSubmit = (values: any) => {
     const image = console.log(values.img[0])
     const data = omit(values, 'img')
-    console.log(data) 
-
-    const payload = {...data, img: file}
-
-    const result = await axios.post('http://localhost:3000/api/product/createproducts', payload)
-
-    try {
-       console.log(result.data) 
-    } catch (error) {
-       console.log(error)
-    }
+    console.log(data)
   } 
 
   const handleChange = (e: any) => {
@@ -36,12 +24,11 @@ const ABC = () => {
     reader.onloadend =() => {
       setFile(reader.result as any)
     }
-
   }
 
 
   return (
-    <div className='grid h-screen place-items-center '>
+    <div className='grid place-items-center h-screen '>
       <form className='flex flex-col' onSubmit={handleSubmit(onSubmit)}>
 
         <label htmlFor="title">Title:</label>
@@ -77,7 +64,7 @@ const ABC = () => {
         <input 
           type="submit" 
           value="publish"
-          className='p-3 text-white bg-blue-200 rounded-lg'
+          className='bg-blue-200 p-3 text-white rounded-lg'
         />
       </form>
 

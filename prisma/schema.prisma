@@ -17,7 +17,8 @@ model Product {
   published Boolean @default(false)
   author    User?   @relation(fields: [authorId], references: [id])
   authorId  String?
-  image String[]
+  image String?
+  price Int? @default(0)
 }
 
 model User {

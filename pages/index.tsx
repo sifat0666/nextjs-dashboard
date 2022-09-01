@@ -6,46 +6,31 @@ import Sidebar from '../components/Sidebar'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { useStateContext } from '../contexts/ContextProvider'
+import { productsPerformance } from '../data/dummy';
+import axios, { Axios } from 'axios'
+import { BASE_URL } from '../utils'
+import { resolveMx } from 'dns'
+import { useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
 
 
-const Home: NextPage = () => {
+const Home =  (props) => {
 
+  const { isLoading, error, data } = useQuery('repoData', () =>
+     fetch('/api/product').then(res =>
+       res.json()
+     )
+   )
 
-  const { activeMenu } = useStateContext()
 
   // const activeMenu = true
 
   return (
     <div>
-  
 
-      <div>
+       <h1>{data.title}</h1>
 
-              <Link href='/'><a href="">ECommerce</a></Link>
-              <Link href='/ecommerce'>Ecommerce</Link>
-
-              {/* Pages */}
-              <Link href='/orders'>Orders</Link>
-              <Link href='/employee'>Employee</Link>
-              <Link href='/customers'>Customers</Link>
-
-              {/* Apps */}
-              <Link href='/kanban'>Kanban</Link>
-              <Link href='/editor'>Ediotor</Link>  
-              <Link href='/calender'>Calender</Link>
-              <Link href='/color-picker'>Color picker</Link>
-              
-              {/* charts */}
-              <Link href='/chart/line'>Line</Link>
-              <Link href='/chart/area'>Area</Link>
-              <Link href='/chart/bar'>Bar</Link>
-              {/* <Link href='line'>Line</Link> */}
-              <Link href='/chart/financial'>financial</Link>
-              <Link href='/chart/color-mapping'>ColorMapping</Link>
-              <Link href='/chart/pyramid'>Pyramid</Link>
-              <Link href='/chart/stacked'>Stacked</Link> 
-            </div>
-
+      
     </div>
   )
 }

@@ -1,5 +1,3 @@
-import 'dotenv/config'
-
 import * as x from 'cloudinary'
 
 const cloudinary = x.v2
